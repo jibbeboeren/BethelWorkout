@@ -1,0 +1,779 @@
+/* ------------------------------------------------------------------
+   Design tokens. Change the look of the whole app from here.
+   Rule of the system: outlined = tappable, dashed = not done yet.
+------------------------------------------------------------------- */
+:root {
+  --concrete: #dadde0; /* page */
+  --chalk: #f4f5f6; /* sheets and lists */
+  --slab: #c6cacf; /* tonal fills, desktop gutters */
+  --iron: #2b3036; /* text and outlines */
+  --iron-soft: #565d66; /* secondary text */
+  --hairline: #c3c8cd;
+  --tape: #626262; /* the one accent: primary action, chosen state */
+  --tape-pressed: #7b7b7b;
+  --pass: #1e7b4c; /* submitted */
+  --pass-tint: #d6ecdf;
+  --pass-ink: #14573a;
+  --fail: #8f1d17;
+  --fail-tint: #f7dad7;
+  --focus: #1f5fd6;
+
+  --font-display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+  --font-body: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --edge: 2px solid var(--iron);
+  --radius-sheet: 24px;
+  --radius-field: 14px;
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-bottom: 120px;
+}
+
+body {
+  margin: 0;
+  background: var(--slab);
+  color: var(--iron);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* ---------- App shell ---------- */
+.app {
+  max-width: 520px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  background: var(--concrete);
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px 12px;
+  background: var(--concrete);
+}
+
+.topbar > :first-child {
+  justify-self: start;
+}
+
+.topbar > :last-child {
+  justify-self: end;
+}
+
+.brand {
+  justify-self: center;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+}
+
+.avatar {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--iron);
+  color: var(--chalk);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+
+.avatar-soft {
+  background: var(--slab);
+  color: var(--iron);
+}
+
+.avatar-lg {
+  width: 64px;
+  height: 64px;
+  font-size: 2rem;
+}
+
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: var(--edge);
+  background: var(--chalk);
+  color: var(--iron);
+  text-decoration: none;
+}
+
+.text-btn {
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: var(--edge);
+  background: var(--chalk);
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.page {
+  padding: 8px 16px calc(32px + env(safe-area-inset-bottom, 0px));
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 3rem;
+  line-height: 0.95;
+  letter-spacing: 0.005em;
+  margin: 8px 0 14px;
+  overflow-wrap: anywhere;
+}
+
+.page-sub {
+  max-width: 36ch;
+  margin: -6px 0 20px;
+  color: var(--iron-soft);
+}
+
+.page-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  color: var(--iron-soft);
+  font-weight: 600;
+}
+
+.section-title {
+  margin: 28px 0 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.stack {
+  display: grid;
+  gap: 20px;
+}
+
+.loading {
+  padding: 28px 4px;
+  color: var(--iron-soft);
+  font-weight: 600;
+}
+
+.hint {
+  color: var(--iron-soft);
+  font-size: 0.9rem;
+}
+
+/* ---------- Surfaces ---------- */
+.sheet {
+  padding: 18px;
+  border-radius: var(--radius-sheet);
+  background: var(--chalk);
+}
+
+.list {
+  overflow: hidden;
+  border-radius: var(--radius-sheet);
+  background: var(--chalk);
+}
+
+.list > * + * {
+  border-top: 1px solid var(--hairline);
+}
+
+.empty {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+  padding: 24px 20px;
+  border: 2px dashed var(--iron-soft);
+  border-radius: var(--radius-sheet);
+}
+
+.empty p {
+  max-width: 34ch;
+}
+
+/* ---------- Rows (workouts, athletes) ---------- */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 76px;
+  padding: 14px 16px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.row::after {
+  content: '';
+  flex: none;
+  width: 9px;
+  height: 9px;
+  margin: 0 4px 0 2px;
+  border-top: 2.5px solid var(--iron);
+  border-right: 2.5px solid var(--iron);
+  transform: rotate(45deg);
+}
+
+.row:active {
+  background: #e6e8ea;
+}
+
+@media (hover: hover) {
+  .row:hover {
+    background: #ebedef;
+  }
+}
+
+.row-body {
+  display: grid;
+  flex: 1;
+  gap: 2px;
+  min-width: 0;
+}
+
+.row-title {
+  font-weight: 700;
+}
+
+.row-sub {
+  color: var(--iron-soft);
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.date-tile {
+  display: grid;
+  flex: none;
+  place-content: center;
+  width: 56px;
+  height: 60px;
+  border-radius: 14px;
+  background: var(--slab);
+  text-align: center;
+  line-height: 1;
+}
+
+.date-tile span {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.date-tile strong {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 0.95;
+}
+
+/* Dashed means still open */
+.date-tile.is-open {
+  border: 2px dashed var(--iron);
+  background: transparent;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.badge-completed {
+  background: var(--pass);
+  color: #fff;
+}
+
+.badge-completed::before {
+  content: '\2713';
+}
+
+.badge-pending {
+  border: 2px dashed var(--iron);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 0 26px;
+  border: var(--edge);
+  border-radius: 999px;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.1s ease, transform 0.1s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-block {
+  display: flex;
+  width: 100%;
+}
+
+.btn-primary {
+  background: var(--tape);
+  color: var(--iron);
+}
+
+.btn-primary:active {
+  background: var(--tape-pressed);
+}
+
+.btn-plain {
+  background: var(--chalk);
+  color: var(--iron);
+}
+
+.btn-plain:active {
+  background: var(--slab);
+}
+
+@media (hover: hover) {
+  .btn-primary:hover:not([disabled]) {
+    background: var(--tape-pressed);
+  }
+
+  .btn-plain:hover:not([disabled]) {
+    background: #e6e8ea;
+  }
+}
+
+/* ---------- Form fields ---------- */
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field + .field {
+  margin-top: 16px;
+}
+
+.field label {
+  font-weight: 700;
+}
+
+.field input {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 16px;
+  border: var(--edge);
+  border-radius: var(--radius-field);
+  background: #fff;
+  font-size: 1rem; /* 16px stops iOS zooming on focus */
+}
+
+/* ---------- Choices (muscle groups, athletes, exercises) ---------- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.choice {
+  position: relative;
+  display: inline-flex;
+}
+
+.choice input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.choice > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 20px;
+  border: var(--edge);
+  border-radius: 999px;
+  background: var(--chalk);
+  font-weight: 600;
+  transition: background-color 0.1s ease;
+}
+
+.choice input:checked + span {
+  background: var(--tape);
+}
+
+.choice input:checked + span::before {
+  content: '\2713';
+  font-weight: 800;
+}
+
+.choice input:focus-visible + span {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.choice-row {
+  display: flex;
+}
+
+.choice-row > span {
+  width: 100%;
+  min-height: 54px;
+  border-radius: 16px;
+}
+
+/* ---------- Student workout form ---------- */
+.group {
+  margin-bottom: 12px;
+  border-radius: var(--radius-sheet);
+  background: var(--chalk);
+}
+
+.group summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 64px;
+  padding: 14px 18px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.group summary::-webkit-details-marker {
+  display: none;
+}
+
+.group summary::after {
+  content: '';
+  flex: none;
+  width: 10px;
+  height: 10px;
+  margin-left: 4px;
+  border-right: 2.5px solid var(--iron);
+  border-bottom: 2.5px solid var(--iron);
+  transform: rotate(45deg);
+  transition: transform 0.15s ease;
+}
+
+.group[open] summary::after {
+  transform: rotate(-135deg);
+}
+
+.group-name {
+  flex: 1;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.count {
+  color: var(--iron-soft);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.count.is-set {
+  color: var(--pass);
+}
+
+.group-body {
+  display: grid;
+  gap: 10px;
+  padding: 0 14px 16px;
+}
+
+.exercise {
+  display: grid;
+  gap: 10px;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 0 2px;
+}
+
+.metrics label {
+  display: grid;
+  gap: 4px;
+  color: var(--iron-soft);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.metrics input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 8px;
+  border: var(--edge);
+  border-radius: var(--radius-field);
+  background: #fff;
+  color: var(--iron);
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: center;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.metrics input::-webkit-outer-spin-button,
+.metrics input::-webkit-inner-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+.actionbar {
+  position: sticky;
+  bottom: 0;
+  display: grid;
+  gap: 10px;
+  margin: 24px -16px 0;
+  padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--hairline);
+  background: var(--concrete);
+}
+
+/* ---------- Messages ---------- */
+.alert,
+.notice {
+  padding: 12px 16px;
+  border-radius: var(--radius-field);
+  font-weight: 600;
+}
+
+.alert {
+  background: var(--fail-tint);
+  color: var(--fail);
+}
+
+.notice {
+  background: var(--pass-tint);
+  color: var(--pass-ink);
+}
+
+/* ---------- Logged lifts: the scoreboard ---------- */
+.legend {
+  margin-bottom: 12px;
+  color: var(--iron-soft);
+  font-size: 0.9rem;
+}
+
+.lifts {
+  display: grid;
+  gap: 12px;
+}
+
+.lift-group {
+  overflow: hidden;
+  border-radius: var(--radius-sheet);
+  background: var(--chalk);
+}
+
+.lift-group-title {
+  padding: 16px 18px 12px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.lift {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  border-top: 1px solid var(--hairline);
+}
+
+.lift-name {
+  min-width: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.lift-score {
+  display: grid;
+  flex: none;
+  justify-items: end;
+  line-height: 1;
+}
+
+.lift-scheme {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2.5rem;
+  letter-spacing: 0.01em;
+}
+
+.lift-weight {
+  margin-top: 2px;
+  color: var(--iron-soft);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.lift-empty {
+  color: var(--iron-soft);
+}
+
+/* ---------- Review facts, tags, profile ---------- */
+.fact {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  font-weight: 600;
+}
+
+.fact strong {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: var(--slab);
+  font-weight: 600;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.profile strong {
+  display: block;
+  font-size: 1.125rem;
+}
+
+/* ---------- Login ---------- */
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  max-width: 520px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: calc(env(safe-area-inset-top, 0px) + 40px) 16px calc(env(safe-area-inset-bottom, 0px) + 24px);
+  background: var(--concrete);
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: min(19vw, 6.5rem);
+  line-height: 0.88;
+  letter-spacing: 0.005em;
+}
+
+.login-intro {
+  max-width: 30ch;
+  margin-top: 16px;
+  color: var(--iron-soft);
+}
+
+.login-title {
+  margin-bottom: 18px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.login .btn {
+  margin-top: 20px;
+}
+
+.login .alert {
+  margin-top: 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
