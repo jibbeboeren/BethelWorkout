@@ -13,7 +13,7 @@ import {
   getWorkoutTemplate,
   saveWorkoutTemplate,
   updateWorkoutTemplate,
-} from '../../services/workoutTemplates'
+} from '../../services/WorkoutTemplates'
 
 const emptyTargets = () => ({
   minSets: '',
