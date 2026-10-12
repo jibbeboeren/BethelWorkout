@@ -8,6 +8,7 @@ import AthleteWorkouts from '../pages/coach/AthleteWorkouts.jsx'
 import WorkoutReview from '../pages/coach/WorkoutReview.jsx'
 import AssignMuscleGroups from '../pages/coach/AssignMuscleGroups.jsx'
 import Account from '../pages/coach/Account.jsx'
+import WorkoutTemplates from '../pages/coach/WorkoutTemplates.jsx'
 
 export default function AppRouter() {
   return (
@@ -26,6 +27,7 @@ export default function AppRouter() {
         <Route path="/coach/review/:id" element={<WorkoutReview />} />
         <Route path="/coach/assign" element={<AssignMuscleGroups />} />
         <Route path="/coach/account" element={<Account />} />
+        <Route path="/coach/templates" element={<WorkoutTemplates />}/>
       </Route>
     </Routes>
   )

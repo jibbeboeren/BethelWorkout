@@ -3,6 +3,24 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    match /workoutTemplates/{templateId} {
+    allow read: if request.auth != null
+      && resource.data.coachId == request.auth.uid
+      && request.auth.token.role == 'coach';
+
+    allow create: if request.auth != null
+      && request.auth.token.role == 'coach'
+      && request.resource.data.coachId == request.auth.uid;
+
+    allow update: if request.auth != null
+      && request.auth.token.role == 'coach'
+      && resource.data.coachId == request.auth.uid
+      && request.resource.data.coachId == resource.data.coachId;
+
+    allow delete: if request.auth != null
+      && request.auth.token.role == 'coach'
+      && resource.data.coachId == request.auth.uid;
+  }
     function isSignedIn() {
       return request.auth != null;
     }
