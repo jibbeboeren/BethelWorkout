@@ -6,7 +6,7 @@ import { useAuth } from '../../context/AuthContext.jsx'
 import {
   getWorkoutTemplates,
   deleteWorkoutTemplate,
-} from '../../services/workoutTemplates'
+} from '../../services/WorkoutTemplates'
 
 export default function WorkoutTemplates() {
   const { user } = useAuth()
